@@ -993,6 +993,52 @@ button[name="close"] {
 	cursor: pointer;
 }
 
+.settings-title {
+	margin-bottom: 6px;
+	color: #c5c8c6;
+}
+
+.control-color-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+}
+
+.control-color-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.control-color-item span {
+	white-space: nowrap;
+}
+
+.offline-export {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.offline-export-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 8px 12px;
+}
+
+.offline-export-field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.offline-export-status {
+	min-height: 18px;
+	color: #b8c4d8;
+	font-size: 0.9em;
+}
+
 .control-color::-moz-color-swatch {
 	border: none;
 	border-radius: var(--control-corners);
