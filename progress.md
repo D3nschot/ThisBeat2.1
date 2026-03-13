@@ -1,0 +1,42 @@
+2026-03-13
+- Added offline WAV export UI (start/duration inputs + Render WAV button) in Audio Files section.
+- Implemented OfflineAudioContext-based renderer that compiles the current bytebeat code, renders stereo output, and downloads 16-bit WAV.
+- Added styling for offline export controls and status messaging.
+- Switched JSZip to a local file (`res/jszip.min.js`) and removed any CDN dependency.
+- Replaced stereo color mapping UI with separate Left/Center/Right color pickers for waveform and diagram.
+- Added 3-channel audio mixing (L/C/R) with center channel mixed into stereo output.
+- Updated scope rendering to use per-channel colors and blend diagram colors additively.
+- Updated waveform points and vertical lines to blend additively instead of overwriting.
+- Rebuilt rollup outputs (npm.cmd run start; rollup completed audio-processor build, index build still running when command timed out).
+- Updated SR divisor behavior to match EnBeat_NEW (hold last value when divisor not met).
+- Added AudioCtx sample rate option and removed forced 48kHz AudioContext sample rate.
+- Updated AudioCtx option label to show actual context sample rate.
+- Added AudioCtx sample rate setting in Settings and reinit logic to apply changes.
+- Added separate FFT bin size zoom with min 64/max 2^15 and updated FFT mode label.
+- Added compatibility mapping for legacy FFT_1024 mode in settings/load.
+- FFT zoom display now shows bin size (or power-of-two label past 512).
+- Added mono color pickers for waveform and diagram and render mono L/R with mono color.
+- Moved mono colors into their own block and used mono color for FFT (with optional L/R FFT overlays).
+- Added optional L/C/R FFT overlays via extra FFT channels setting.
+- Added toggle to show/hide mono FFT.
+- Added FFT fill-bottom toggle and color mixing for extra FFT channels.
+- Extra FFT worklet now outputs raw L/C/R channels for proper separation.
+- Fixed FFT size halving on refresh by preventing setScale(0) from changing FFT bin size.
+- Fixed L/C/R FFT channel ordering so colors match left/center/right outputs.
+- Preserved FFT bin size when enabling extra FFT channels.
+- Apply FFT bin size after creating extra analysers so it no longer resets.
+- Added selectable FFT blend modes (including difference/subtract) and apply to mono+extra FFT.
+- FFT blend mode now only affects mono vs LCR (LCR stays add) and only for fill.
+- Set default FFT blend mode to Add.
+- Swapped FFT bin controls and updated zoom tooltips to Add/Remove bins in FFT mode.
+- Increased L/C/R FFT fill alpha to full brightness.
+- Made FFT line rendering additive for L/C/R when fill is disabled.
+- Fixed scope zoom buttons staying disabled when leaving FFT mode.
+- Restored normal zoom direction for non-FFT modes while keeping FFT add/remove bin behavior.
+- Mono scope detection now uses output array length (1/2/3) instead of L/R equality.
+- Fixed FFT add/remove buttons disabling logic after swapping controls.
+- Reset zoom now restores FFT bin size to the default value.
+- Added support for `long_code: true` in exotic projects to show a Load button instead of inline code.
+- Added a settings option for AudioCtx buffer size that reinitializes the audio context.
+- Reset zoom now correctly restores FFT bin size even after changing non-FFT zoom.
+- Prevented startup zoom init from resetting saved FFT bin size.

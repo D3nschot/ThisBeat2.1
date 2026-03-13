@@ -124,7 +124,7 @@ globalThis.bytebeat = new class {
 			case 'control-play-forward': this.playbackToggle(true, true, 1); break;
 			case 'control-rec': this.toggleRecording(); break;
 			case 'control-reset': this.resetTime(); break;
-			case 'control-scale': this.setScale(-scope.drawScale); break;
+			case 'control-scale': this.setScale(scope.drawMode === 'FFT' ? 0 : -scope.drawScale); break;
 			case 'control-scaledown': this.setScale(scope.drawMode === 'FFT' ? 1 : -1, elem); break;
 			case 'control-scaleup': this.setScale(scope.drawMode === 'FFT' ? -1 : 1); break;
 			case 'control-srdivisor-down': this.setSRDivisor(-1); break;
@@ -268,7 +268,11 @@ globalThis.bytebeat = new class {
 			this.setColorDiagramCenter();
 			this.setColorDiagramRight();
 			this.setColorTimeCursor();
-			this.setScale(0);
+			if(scope.drawMode === 'FFT') {
+				this.updateScaleDisplay();
+			} else {
+				this.setScale(0);
+			}
 			this.applyFftBinSize(this.settings.fftBinSize || this.defaultSettings.fftBinSize);
 			this.updateScaleDisplay();
 			this.setScopePreferencesCheckbox();
