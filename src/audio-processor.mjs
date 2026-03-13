@@ -271,6 +271,37 @@ class audioProcessor extends AudioWorkletProcessor {
 				this.getValues = (funcValue, ch) =>
 					(this.lastByteValue[ch] = (funcValue + 128) & 255) / 127.5 - 1;
 				break;
+			case 'Bitbeat':
+				this.getValues = (funcValue, ch) =>
+					(this.lastByteValue[ch] = funcValue & 1 ? 192 : 64) / 127.5 - 1;
+				break;
+			case '2048':
+				this.getValues = (funcValue, ch) =>
+					(this.lastByteValue[ch] = Math.floor(funcValue / 8) & 255) / 127.5 - 1;
+				break;
+			case 'logmode':
+				this.getValues = (funcValue, ch) =>
+					(this.lastByteValue[ch] = (Math.log2(funcValue) * 32) & 255) / 127.5 - 1;
+				break;
+			case 'logHack':
+				this.getValues = (funcValue, ch) => {
+					const neg = (funcValue < 0) ? -32 : 32;
+					this.lastByteValue[ch] = (Math.log2(Math.abs(funcValue)) * neg) & 255;
+					return this.lastByteValue[ch] / 127.5 - 1;
+				};
+				break;
+			case 'logHack2':
+				this.getValues = (funcValue, ch) => {
+					const neg = funcValue < 0;
+					if(funcValue === 0) {
+						this.lastByteValue[ch] = 128;
+						return 0;
+					}
+					this.lastByteValue[ch] =
+						((Math.log2(Math.abs(funcValue)) * (neg ? -16 : 16)) + (neg ? -127 : 128)) & 255;
+					return this.lastByteValue[ch] / 127.5 - 1;
+				};
+				break;
 			case 'Floatbeat':
 			case 'Funcbeat':
 				this.getValues = (funcValue, ch) => {

@@ -790,6 +790,21 @@ globalThis.bytebeat = new class {
 			return (value & 255) / 127.5 - 1;
 		case 'Signed Bytebeat':
 			return ((value + 128) & 255) / 127.5 - 1;
+		case 'Bitbeat':
+			return (value & 1) - 0.5;
+		case '2048':
+			return (value & 2047) / 1020 - 1;
+		case 'logmode':
+			return ((Math.log2(value) * 32) & 255) / 127.5 - 1;
+		case 'logHack': {
+			const neg = (value < 0) ? -32 : 32;
+			return ((Math.log2(Math.abs(value)) * neg) & 255) / 127.5 - 1;
+		}
+		case 'logHack2': {
+			const neg = value < 0;
+			return value === 0 ? 0 :
+				((((Math.log2(Math.abs(value)) * (neg ? -16 : 16)) + (neg ? -127 : 128)) & 255) / 127.5 - 1);
+		}
 		case 'Floatbeat':
 		case 'Funcbeat':
 		default: {
