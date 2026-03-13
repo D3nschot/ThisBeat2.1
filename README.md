@@ -12,7 +12,7 @@ Discussion threads: https://dollchan.net/btb/
 2. Run with npm:
 ```
 git clone https://github.com/D3nschot/ThisBeat2.1.git
-cd bytebeat-composer
+cd ThisBeat2.1
 npm install
 npm start
 ```
