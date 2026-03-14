@@ -807,17 +807,17 @@ return function process(t, sr) {
 			k,k+12,[mod(k+8,12)+28,mod(k+11,12)+28,mod(k+3,12)+28]
 		],
 	
-		[0],
-		[x*256],
+		[0,0,4],
+		[x*256,x*256,0.007],
 		3,
 	
-		[0.2],
+		[0.2,0.2,0.2],
 	
 		[0],
 		[0],
 		[0],
 
-		8,
+		[8,8,0],
 		x/16,
 		-0.9,
 		1,
@@ -872,7 +872,7 @@ return function process(t, sr) {
 	out=(d+source/40)*((x*2%1)**1.5)*2+source/20
 
 	out=hp(out,.05,0,"out12")
-	out+=sin(cbrt(x%.5/r)*350)/3
+	out+=sin(cbrt(x%.5/r/2)*350)/3
 	out=hp(out,.05,0,"out24")
 	
 	
